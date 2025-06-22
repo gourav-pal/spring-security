@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configurers.AuthorizeH
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CsrfToken;
@@ -28,7 +29,7 @@ public class SecurityConfig {
         public AuthenticationProvider authProvider() {
             DaoAuthenticationProvider provider=new DaoAuthenticationProvider();
             provider.setUserDetailsService(userDetailsService);
-            provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
+            provider.setPasswordEncoder(new BCryptPasswordEncoder(12));
             return provider;
         }
 
@@ -41,17 +42,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return http.build();
-            /*
-             * @Bean public UserDetailsService userDetailsService() {
-             *
-             * UserDetails user=User .withDefaultPasswordEncoder() .username("navin")
-             * .password("n@123") .roles("USER") .build();
-             *
-             * UserDetails admin=User .withDefaultPasswordEncoder() .username("admin")
-             * .password("admin@789") .roles("ADMIN") .build();
-             *
-             * return new InMemoryUserDetailsManager(user,admin); }
-             */
+
     }
 
 

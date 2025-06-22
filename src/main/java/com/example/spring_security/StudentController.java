@@ -30,8 +30,8 @@ public class StudentController {
 
 
     @GetMapping("/home")
-    public String getDetails(){
-        return "Hello";
+    public String getDetails(HttpServletRequest http){
+        return "Hello  "+ http.getSession().getId();
     }
 
     @GetMapping("/getToken")

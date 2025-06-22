@@ -64,6 +64,7 @@ spring_security/
 │       │   ├── SpringSecurityApplication.java
 │       │   ├── StudentController.java
 │       │   └── model/Students.java
+        |   |__config/SecurityConfig
 │       └── resources/
 │           └── application.properties
 ├── pom.xml
